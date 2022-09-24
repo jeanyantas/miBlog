@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+<head>
+    <title>{% block title %} blog | {{ post.title }} {% endblock title %}</title>
+</head>
+
+{% block body %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-md-11">
+            <div class="text-center mt-2">
+                <h2>{{ post.title }}</h2>
+                <h3 class="my-2 h6 text-muted">{{ post.date|date:'F jS Y' }}</h3>
+            
+                <img src="{{post.image.url}}" alt="{{post.title}}" class="border border-dark img-fluid rounded-3 img-post-detail">
+            
+                <div class="my-4 lh-1 justificado">
+                    <p>{{ post.description|safe|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="d-flex justify-content-end m-3">
+                <a href="{% url 'miBlog:posts' %}" class="btn btn-light border border-secondary text-black">Atrás</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            {# Mostrar el formulario de comentarios #}
+            <h4 class="text-primary">Agregar comentario</h4>
+            <div class="form-control">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <p><input type="submit" value="Agregar" class="form-control btn btn-light border border-primary text-black"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            {# Mostrar total de comentarios #}
+            {% with comments.count as total_comments %}
+            <h4 class="text-primary mt-4">
+                {{ total_comments }} comentario{{ total_comments|pluralize }}
+            </h4>
+            {# el tag {% with %} permite asignar un valor a una nueva variable que estará disponible para usarse hasta la etiqueta {% endwith %}. #}
+            {% endwith %}
+            
+            {# Mostrar todos los comentarios #}
+            {% for comment in comments %}
+            {# Enumera los comentarios con la variable {{ forloop.counter }}, que contiene el contador de bucles en cada iteración. #}
+            <div class="my-3 p-3 bg-primary bg-gradient text-black rounded-2">
+                    <b>
+                        Comentario {{ forloop.counter }} de {{ comment.nombre }}
+                        {{ comment.created }}:
+                    </b>
+                    {{ comment.comentario|safe|linebreaks }}
+            </div>
+                {% empty %}
+                    <p>Todavía no hay comentarios</p>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

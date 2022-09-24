@@ -1,0 +1,13 @@
+.bg-body {
+    background-color: #797677;
+    color: white;
+}
+.justificado {
+    text-align: justify;
+}
+.img-post-detail {
+    height: 500px;
+}
+.indice-li {
+    list-style: none;
+}

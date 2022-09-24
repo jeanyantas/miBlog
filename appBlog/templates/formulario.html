@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+<head>
+    <title>{% block title %}Blog | Form{% endblock title %}</title>
+</head>
+{% block body %}
+<body>
+    <div class="row container-fluid">
+        <div class="col-md-6 mx-auto">
+            <div class="my-4">
+                <form action="/publicar/" method="POST" enctype="multipart/form-data" class="form-control border border-dark bg-light bg-gradient text-black">{% csrf_token %}
+                    <div class="mb-3">
+                        <label for="txtTitulo" class="form-label">Título</label>
+                        <input type="text" name="txtTitulo" class="form-control bg-light bg-gradient text-black" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtDescripcion" class="form-label">Descripción</label>
+                        <textarea name="txtDescripcion" rows="6" style="resize: none;" class="form-control bg-light bg-gradient text-black" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="file" name="imagen" class="form-control bg-light bg-gradient text-black" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtFecha" class="form-label">Fecha</label>
+                        <input type="date" name="txtFecha" class="form-control bg-light bg-gradient text-black" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="form-control btn btn-light border border-secondary text-black" value="Publicar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock body %}

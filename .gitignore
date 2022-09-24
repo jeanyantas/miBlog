@@ -1,0 +1,26 @@
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+**/__pycache__
+# Files BD
+media
+#photos
+#video
+#files

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% load static %}
+<head>
+    <title>{% block title %}Blog | Inicio{% endblock title %}</title>
+</head>
+<body>
+    {% block body %}
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-10 mx-auto">
+                <p class="h1">Noticias de interés</p>
+                <p class="h5 text-secondary">Aquí encontrarás temas muy interesantes.</p>
+                {% if posts %}
+                    {% for post in posts %}
+                        <div class="p-3">
+                            <div class="card card-body bg-white text-black">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="{{ post.image.url }}" alt="{{post.title}}" class="img-fluid rounded-3 mt-2 border border-light">
+                                    </div>
+                                    <div class="col-9">
+                                        <p class="h4">{{ post.title }}</p>
+                                        <p>{{ post.description|truncatechars:300 }}</p>
+                                        <p>{{ post.date|date:'M d Y'|upper }}</p>
+
+                                        <a href="{% url 'miBlog:post_detail' post.id %}" class="btn btn-primary">Leer más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="m-5">No existen entradas.</p>
+                {% endif %}
+
+                {# Pagination #}
+                {% include "pagination.html" with page=posts %}
+            </div>
+            {% comment %}
+            <div class="col-md-4">
+                <div class="p-3 h4">
+                    Índice
+                    <div class="mt-5 list-group">
+                        {% for post in posts %}
+                        <a href="{% url 'App_blog:post_detail' post.id %}" class="h6 list-group-item list-group-item-action border border-primary bg-light"><li class="indice-li">{{ post.title }}</li></a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+    {% endblock body %}
+</body>

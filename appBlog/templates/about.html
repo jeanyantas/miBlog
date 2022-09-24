@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load static %}
+<head>
+    <title>{% block title %}Blog | About{% endblock title %}</title>
+</head>
+<body>
+    {% block body %}
+    <div class="container-fluid">
+        <div class="p-5">
+            <div class="my-auto text-center text-black">
+                <h3>Jean Pool Oliver Yantas Inocente</h3>
+                <p>Eres tan grande como te propongas serlo, y puedes llegar tan lejos como te dé la gana, ánimo.😎🏃‍♂️</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mx-auto">
+                    <img src="{% static 'img/about.jpg' %}" alt="foto_about" class="img-fluid rounded-circle">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}
+</body>
+
